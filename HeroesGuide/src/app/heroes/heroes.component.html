@@ -1,0 +1,33 @@
+<p>heroes works!</p>
+<p>Date : {{ todayDate }}</p>
+<h2>{{ hero.name | uppercase }} Details</h2>
+<div><span>id: </span>{{ hero.id }}</div>
+<div><span>name: </span>{{ hero.name }}</div>
+<label
+  >name:
+  <input
+    [(ngModel)]="hero.name"
+    (ngModelChange)="onChange($event)"
+    placeholder="name"
+  />
+</label>
+
+<app-child [data]="hero.name" [number]="number"></app-child>
+<button (click)="des()">+</button>
+<button (click)="esc()">-</button>
+
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li
+    *ngFor="let herod of heroes"
+    (click)="onSelect(herod)"
+    [ngClass]="herod === selectH ? 'selected' : 'danger'"
+  >
+    <span class="badge">{{ herod.id }}</span> {{ herod.name }}
+  </li>
+</ul>
+<div *ngIf="selectH">
+  <h2>{{ selectH.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{ selectH.id }}</div>
+  <div><span>name: </span>{{ selectH.name }}</div>
+</div>
