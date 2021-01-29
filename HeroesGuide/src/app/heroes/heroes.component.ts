@@ -14,7 +14,7 @@ export class HeroesComponent implements OnInit {
     id: 1,
     name: 'Windsstorm'
   };
-  heroes?: Hero[];
+  heroes!: Hero[];
   size: Number = 16;
   number: Number = 0;
 
@@ -49,6 +49,18 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes().subscribe(heroes => (this.heroes = heroes));
   }
   todayDate: any;
+
+  add(name: String) {
+    name = name.trim();
+    if (!name) return;
+    this.heroService.addHero({ name } as Hero).subscribe(hero => {
+      this.heroes.push(hero);
+    });
+  }
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
+  }
 
   ngOnInit() {
     this.getHeroes();

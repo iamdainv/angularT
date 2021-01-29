@@ -12,6 +12,17 @@
   />
 </label>
 
+<div>
+  <label
+    >Hero name:
+    <input #heroName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value = ''">
+    add
+  </button>
+</div>
+
 <app-child [data]="hero.name" [number]="number"></app-child>
 <button (click)="des()">+</button>
 <button (click)="esc()">-</button>
@@ -23,7 +34,10 @@
     (click)="onSelect(herod)"
     [ngClass]="herod === selectH ? 'selected' : 'danger'"
   >
-    <span class="badge">{{ herod.id }}</span> {{ herod.name }}
+    <a routerLink="/detail/{{ herod.id }}"
+      ><span class="badge">{{ herod.id }}</span> {{ herod.name }}</a
+    >
+    <button (click)="delete(herod)">x</button>
   </li>
 </ul>
 <div *ngIf="selectH">
